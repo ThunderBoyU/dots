@@ -1,0 +1,11 @@
+#!/bin/sh
+while read file
+do
+        case "$1" in
+
+	"w") setbg "$file" & ;;
+
+	"t") tesseract "$file" tmp_text && st -e nvim "$(pwd)/tmp_text.txt" & ;;
+
+	esac
+done
