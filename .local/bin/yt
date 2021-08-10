@@ -3,13 +3,11 @@
 sfeedrc="$XDG_CONFIG_HOME/sfeed/ytrc"
 feeddir="$XDG_CONFIG_HOME/sfeed/ytfeeds"
 
-format="best[width=1920]"
-
 player="mpv" #Needs to be able to play youtube videos with url as argument
 
 depcheck() {
 	for dep in "$@"; do
-		command -v "$dep" 1>/dev/null || { notify-send ""$dep" not found. Please install it.\n"  ; exit 2; }
+		command -v "$dep" 1>/dev/null || { notify-send ""$dep" not found. Please install it."  ; exit 2; }
 	done
 }
 
@@ -47,7 +45,7 @@ depcheck $player
 
 [ ! -z "$1" ] && echo "$1" | grep youtube.com && { $player "$(geturl "$1")" && exit; } 
 
-selection="$(echo "Search video\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
+selection="$(printf "Search video\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
 
 [ "$selection" = "Search video" ] && ytfzf -D
 [ "$selection" = "Subscriptions" ] &&  sfeed_update "$sfeedrc" >/dev/null && viewfeed
