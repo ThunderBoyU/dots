@@ -1,0 +1,10 @@
+#!/bin/sh
+
+LAYOUT=$(setxkbmap -query | grep -oP "us|fi")
+if [ $LAYOUT = 'us' ]
+then
+	setxkbmap fi
+else
+	setxkbmap us
+fi
+notify-send "Keyboard layout switched to $(setxkbmap -query | grep -oP "us|fi")"

@@ -1,0 +1,44 @@
+#!/bin/sh
+
+# Pick wallpaper using sxiv
+
+# All the options here may make the script look complicated, but in reality you just change the wallpaper location and wpsetter if you want, and then use the command.
+# Requirements by default:
+# sxiv
+# dmenu
+
+
+
+# Location of wallpapers contains folders named after category, which you can then pick from with dmenu or by passing a folder name as $1
+
+# Example layout
+
+#└── walls
+#    ├── category-1
+#    │   ├── file-2.png
+#    │   └── file.png
+#    ├── category-2
+#    │   └── file-3.png
+#    └── category-3
+#        └── file-69.png
+
+# Choosing category-1 from dmenu would result in sxiv showing file.png and file-2.png
+# Using the command "pickwall category-2" would result in sxiv showing file-3.png
+# And using the command "pickwall all" would result in sxiv showing file.png, file-2.png, file-3.png and file-69.png
+
+# If this is too complicated, you are truly retarded.
+
+# Folders with a % sign in their name are hidden in the menu
+
+# You can change pretty much everything here
+
+loc="$WALLPAPERS" # Location containing image folders, $WALLPAPERS is set by my dotfiles
+wpsetter="setbg" # Command that image is passed to as an argument
+menu="dmenu -l 20" # Command with dmenu like functionality
+picker="sxiv -tbor" # Command for picking images, i don't know why someone would use anything else than sxiv for this, but it's a possibility
+all="all" # Argument to show all wallpaper categories at once
+
+[ -z "$1" ] && "$wpsetter" "$($picker "$loc"/$(ls "$loc" | grep -v % | $menu))"
+[ ! -z "$1" -a "$1" != "$all" ] && "$wpsetter" "$($picker "$loc"/"$1")"
+[ "$1" = "$all" ] && "$wpsetter" "$($picker "$loc"/)"
+

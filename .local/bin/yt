@@ -1,0 +1,55 @@
+#!/bin/sh
+
+sfeedrc="$XDG_CONFIG_HOME/sfeed/ytrc"
+feeddir="$XDG_CONFIG_HOME/sfeed/ytfeeds"
+
+format="best[width=1920]"
+
+player="mpv" #Needs to be able to play youtube videos with url as argument
+
+depcheck() {
+	for dep in "$@"; do
+		command -v "$dep" 1>/dev/null || { notify-send ""$dep" not found. Please install it.\n"  ; exit 2; }
+	done
+}
+
+samplerc() {
+	printf "sfeedpath=$(echo "$feeddir")
+
+feeds() {
+
+}" > "$sfeedrc"
+}
+
+[ ! -f "$sfeedrc" ] && samplerc #Run samplerc function if $sfeedrc doesn't exist
+[ ! -d "$feeddir" ] && mkdir -p "$feeddir" #Create $feeddir if it doesn't exist
+
+geturl() {
+	echo "$1" | sed 's/^.*https:\/\//https:\/\//'
+}
+
+addchannel() {
+	channelurl="$(echo "" | dmenu -i -p "Paste channel url: " )"
+	[ -z "$channelurl" ] && notify-send "Error: No url given" && exit 2
+	channelname="$(echo "" | dmenu -i -p "Give channel name: " )"
+	echo "$channelurl" | grep "/channel/" && sed "/^}/i feed \"$(echo "$channelname")\" \"https://www.youtube.com/feeds/videos.xml?channel_id=$(echo "$channelurl" | sed  's/^.*\/channel\///')\"" "$sfeedrc" -i
+	echo "$channelurl" | grep "/user/" && sed "/^}/i feed \"$(echo "$channelname")\" \"https://www.youtube.com/feeds/videos.xml?user=$(echo "$channelurl" | sed  's/^.*\/user\///')\"" "$sfeedrc" -i
+
+}
+
+viewfeed() {
+	depcheck $player sfeed
+	yt "$(sfeed_plain "$feeddir"/* | sort -r | dmenu -i -l 40)"
+
+}
+
+depcheck $player
+
+[ ! -z "$1" ] && echo "$1" | grep youtube.com && { $player "$(geturl "$1")" && exit; } 
+
+selection="$(echo "Search video\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
+
+[ "$selection" = "Search video" ] && ytfzf -D
+[ "$selection" = "Subscriptions" ] &&  sfeed_update "$sfeedrc" >/dev/null && viewfeed
+[ "$selection" = "Subscribe to channel" ] && addchannel
+

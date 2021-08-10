@@ -1,0 +1,109 @@
+Xcursor.size: 16
+Xcursor.theme: Adwaita
+
+! Dracula Xresources Theme
+
+!#define fg #F8F8F2
+!#define bg #282A36
+!#define c0 #000000
+!#define c1 #FF5555
+!#define c2 #50FA7B
+!#define c3 #F1FA8C
+!#define c4 #BD93F9
+!#define c5 #FF79C6
+!#define c6 #8BE9FD
+!#define c7 #BFBFBF
+!#define c8 #4D4D4D
+!#define c9 #FF6E67
+!#define c10 #5AF78E
+!#define c11 #F4F99D
+!#define c12 #CAA9FA
+!#define c13 #FF92D0
+!#define c14 #9AEDFE
+!#define c15 #E6E6E6
+
+! Solarized Dark Xresources Theme
+!#define bg #002b36
+!#define fg #839496
+!#define c0 #073642
+!#define c1 #dc322f
+!#define c2 #859900
+!#define c3 #b58900
+!#define c4 #268bd2
+!#define c5 #d33682
+!#define c6 #2aa198
+!#define c7 #eee8d5
+!#define c8 #002b36
+!#define c9 #cb4b16
+!#define c10 #586e75
+!#define c11 #657b83
+!#define c12 #839496
+!#define c13 #6c71c4
+!#define c14 #93a1a1
+!#define c15 #fdf6e3
+
+
+! Gruvbox Xresources Theme
+
+!#define bg #282828
+!#define fg #ebdbb2
+!#define c0 #282828
+!#define c8 #928374
+!#define c1 #cc241d
+!#define c9 #fb4934
+!#define c2 #98971a
+!#define c10 #b8bb26
+!#define c3  #d79921
+!#define c11 #fabd2f
+!#define c4 #458588
+!#define c12 #83a598
+!#define c5 #b16286
+!#define c13 #d3869b
+!#define c6  #689d6a
+!#define c14 #8ec07c
+!#define c7  #a89984
+!#define c15 #ebdbb2
+
+! Nord Xresources Theme
+
+!#define bg #2E3440
+!#define fg #D8DEE9 
+!#define c0 #2E3440
+!#define c1 #3B4252
+!#define c2 #434C5E
+!#define c3 #4C566A
+!#define c4 #D8DEE9
+!#define c5 #E5E9F0
+!#define c6 #ECEFF4
+!#define c7 #8FBCBB
+!#define c8 #88C0D0
+!#define c9 #81A1C1
+!#define c10 #5E81AC
+!#define c11 #BF616A
+!#define c12 #D08770
+!#define c13 #EBCB8B
+!#define c14 #A3BE8C
+!#define c15 #B48EAD
+
+
+
+!*.background: bg
+!*.foreground: fg
+!*.color0: c0
+!*.color1: c1
+!*.color2: c2
+!*.color3: c3
+!*.color4: c4
+!*.color5: c5
+!*.color6: c6
+!*.color7: c7
+!*.color8: c8
+!*.color9: c9
+!*.color10: c10
+!*.color11: c11
+!*.color12: c12
+!*.color13: c13
+!*.color14: c14
+!*.color15: c15
+
+st.alpha: 0.8

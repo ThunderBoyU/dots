@@ -1,0 +1,11 @@
+#!/bin/sh
+
+displays & # Set correct monitor layout and refresh rate
+xrdb -load "$XRESOURCES" # Load Xresources
+xsetroot -cursor_name left_ptr & # Change default cursor on desktop
+setbg & # Set wallpaper, if pywal is installed it will override xresources
+xcompmgr & # Compositor, needed for transparency
+mpDris2 & # 
+unclutter & # Hide cursor if it is inactive
+dwmblocks & # Update dwm status bar
+launchxnotify & # Start notification daemon and tiramisu, check launchxnotify in the xnotify source code for info

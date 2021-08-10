@@ -1,0 +1,1 @@
+/home/thunder/.config/zsh/profile
