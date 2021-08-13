@@ -43,9 +43,9 @@ viewfeed() {
 
 depcheck $player
 
-[ ! -z "$1" ] && echo "$1" | grep youtube.com && { $player "$(geturl "$1")" && exit; } 
+[ ! -z "$1" ] && echo "$1" | { grep youtube.com && { notify-send "Opening video" "Please wait..." & $player "$(geturl "$1")" & exit; } || { notify-send "Not a valid youtube url." ; exit 2; } ; }
 
-selection="$(printf "Search video\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
+[ -z "$1" ] && selection="$(printf "Search video\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
 
 [ "$selection" = "Search video" ] && ytfzf -D
 [ "$selection" = "Subscriptions" ] &&  sfeed_update "$sfeedrc" >/dev/null && viewfeed
