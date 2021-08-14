@@ -15,5 +15,3 @@ else
 fi
 
 exec dwm
-#exec bspwm
-#exec xmonad

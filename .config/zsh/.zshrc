@@ -73,6 +73,7 @@ alias a="clear && afetch"
 alias mpv="noglob mpv"
 alias ytdl="noglob youtube-dl"
 alias youtube-dl="noglob youtube-dl"
+alias yarn='yarn --use-yarnrc "$XDG_CONFIG_HOME/yarn/config"'
 
 # STARTUP
 a

@@ -2,6 +2,7 @@
 
 sfeedrc="$XDG_CONFIG_HOME/sfeed/ytrc"
 feeddir="$XDG_CONFIG_HOME/sfeed/ytfeeds"
+log="$XDG_DATA_HOME/ytlog"
 
 player="mpv" #Needs to be able to play youtube videos with url as argument
 
@@ -42,12 +43,14 @@ viewfeed() {
 }
 
 depcheck $player
+[ ! -f "$log" ] && touch "$log"
 
-[ ! -z "$1" ] && echo "$1" | { grep youtube.com && { notify-send "Opening video" "Please wait..." & $player "$(geturl "$1")" & exit; } || { notify-send "Not a valid youtube url." ; exit 2; } ; }
+[ ! -z "$1" ] && echo "$1" | { grep youtube.com && { notify-send "Opening video" "Please wait..." & echo "$(geturl "$1")" > "$log" & $player "$(geturl "$1")" & exit; } || { notify-send "Not a valid youtube url." ; exit 2; } ; }
 
-[ -z "$1" ] && selection="$(printf "Search video\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
+[ -z "$1" ] && selection="$(printf "Search video\nWatch video from url\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
 
 [ "$selection" = "Search video" ] && ytfzf -D
+[ "$selection" = "Watch video from url" ] && url="$(echo "" | dmenu -i -p "Paste video url: " )" && yt "$url"
 [ "$selection" = "Subscriptions" ] &&  sfeed_update "$sfeedrc" >/dev/null && viewfeed
 [ "$selection" = "Subscribe to channel" ] && addchannel
 
