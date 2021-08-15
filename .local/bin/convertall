@@ -1,0 +1,10 @@
+#!/bin/sh
+
+# Converts all files with given extension in the same folder.
+# Syntax: convertall (extension to convert from, without the dot) (extension to convert to, without the dot)
+
+for i in "*"."$1";
+  do name=`echo "$i" | cut -d'.' -f1`
+  echo "$name"
+  ffmpeg -i "$i" "${name}."$2""
+done
