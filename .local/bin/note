@@ -1,0 +1,12 @@
+#!/bin/sh
+
+location="${XDG_DATA_HOME:-$HOME/.local/share/}/notes/"
+editor="$EDITOR"
+
+[ ! -d "$location" ] && mkdir -p "$location"
+
+[ "$1" = "list" ] && $editor "$location"/"$(ls "$location" | dmenu -i -l 20)" && exit
+
+[ ! -z "$1" ] && note="[$(date '+%d %b %Y')] $1" && $editor "$location/$note" && exit
+
+
