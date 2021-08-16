@@ -22,11 +22,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
  Plug 'jaredgorski/spacecamp'
  Plug 'mhinz/vim-startify'  
  Plug 'preservim/nerdtree'
- Plug 'neoclide/coc.nvim', {'branch': 'release'}
 call plug#end()
-
-inoremap <silent><expr> <TAB> pumvisible() ? "\<C-n>" : <SID>check_back_space() ? "\<TAB>" : coc#refresh()
-inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
 
 set clipboard+=unnamedplus "Set system clipboard, needs xclip installed
 set number relativenumber "Line numbers relative to location for easier navigation

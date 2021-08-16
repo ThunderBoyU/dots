@@ -2,10 +2,15 @@
 
 location="${XDG_DATA_HOME:-$HOME/.local/share/}/notes/"
 editor="$EDITOR"
+terminal="$TERMINAL"
+
+list() {
+	test -t 0 && $editor "$location"/"$(ls "$location" | dmenu -i -l 20)" || $terminal -e $editor "$location"/"$(ls "$location" | dmenu -i -l 20)"
+}
 
 [ ! -d "$location" ] && mkdir -p "$location"
 
-[ "$1" = "list" ] && $editor "$location"/"$(ls "$location" | dmenu -i -l 20)" && exit
+[ "$1" = "list" ] && list && exit 
 
 [ ! -z "$1" ] && note="[$(date '+%d %b %Y')] $1" && $editor "$location/$note" && exit
 
