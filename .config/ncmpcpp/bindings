@@ -234,8 +234,8 @@
 #def_key "right"
 #  slave_screen
 #
-#def_key "right"
-#  volume_up
+def_key "="
+  volume_up
 #
 #def_key "+"
 #  volume_up
@@ -249,8 +249,8 @@
 #def_key "left"
 #  volume_down
 #
-#def_key "-"
-#  volume_down
+def_key "-"
+  volume_down
 #
 #def_key ":"
 #  execute_command
