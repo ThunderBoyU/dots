@@ -1,0 +1,52 @@
+#!/bin/sh
+
+sfeedrc="$XDG_CONFIG_HOME/sfeed/sfeedrc"
+feeddir="$XDG_CONFIG_HOME/sfeed/feeds"
+log="$XDG_DATA_HOME/feedlog"
+
+opener="$BROWSER" #Needs to be able to open urls 
+
+depcheck() {
+	for dep in "$@"; do
+		command -v "$dep" 1>/dev/null || { notify-send ""$dep" not found. Please install it."  ; exit 2; }
+	done
+}
+
+samplerc() {
+	printf "sfeedpath=$(echo "$feeddir")
+
+feeds() {
+
+}" > "$sfeedrc"
+}
+
+[ ! -f "$sfeedrc" ] && samplerc #Run samplerc function if $sfeedrc doesn't exist
+[ ! -d "$feeddir" ] && mkdir -p "$feeddir" #Create $feeddir if it doesn't exist
+
+geturl() {
+	echo "$1" | sed 's/^.*https:\/\//https:\/\//'
+}
+
+addfeed() {
+	feedurl="$(echo "" | dmenu -i -p "Paste feed url: " )"
+	[ -z "$feedurl" ] && notify-send "Error: No url given" && exit 2
+	feedname="$(echo "" | dmenu -i -p "Give feed a name: " )"
+	sed "/^/i feed \"$(echo "$feedname")\" \"$(echo "$feedurl")\"" "$sfeedrc" -i
+
+}
+
+viewfeed() {
+	depcheck $opener sfeed
+	feed "$(sfeed_plain "$feeddir"/* | sort -r | dmenu -i -l 40)"
+
+}
+
+depcheck $opener
+[ ! -f "$log" ] && touch "$log"
+
+[ ! -z "$1" ] && echo "$1" | { notify-send "Opening url" "Please wait..." & echo "$(geturl "$1")" > "$log" & $opener "$(geturl "$1")" & exit; }
+[ -z "$1" ] && selection="$(printf "Subscriptions\nSubscribe to feed" | dmenu -i -p "Select Action")" 
+
+[ "$selection" = "Subscriptions" ] &&  sfeed_update "$sfeedrc" >/dev/null && viewfeed
+[ "$selection" = "Subscribe to feed" ] && addfeed
+
