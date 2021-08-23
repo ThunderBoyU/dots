@@ -9,4 +9,4 @@ mpDris2 & #
 unclutter & # Hide cursor if it is inactive
 dwmblocks & # Update dwm status bar
 launchxnotify & # Start notification daemon and tiramisu, check launchxnotify in the xnotify source code for info
-xset r rate 300 5 & # Set keyboard rate higher
+xset r rate 300 50 & # Set keyboard rate higher

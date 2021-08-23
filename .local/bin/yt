@@ -45,7 +45,7 @@ viewfeed() {
 depcheck $player
 [ ! -f "$log" ] && touch "$log"
 
-[ ! -z "$1" ] && echo "$1" | { grep youtube.com && { notify-send "Opening video" "Please wait..." & echo "$(geturl "$1")" > "$log" & $player "$(geturl "$1")" & exit; } || { notify-send "Not a valid youtube url." ; exit 2; } ; }
+[ ! -z "$1" ] && echo "$1" | { grep youtube.com && { notify-send "Opening video" "Please wait..." & echo "$(geturl "$1")" >> "$log" & $player "$(geturl "$1")" & exit; } || { notify-send "Not a valid youtube url." ; exit 2; } ; }
 
 [ -z "$1" ] && selection="$(printf "Search video\nWatch video from url\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
 
