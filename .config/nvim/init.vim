@@ -19,15 +19,16 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
  Plug 'lervag/vimtex'
  Plug 'sheerun/vim-polyglot'
  Plug 'jiangmiao/auto-pairs'
- Plug 'jaredgorski/spacecamp'
+ Plug 'dracula/vim'
  Plug 'mhinz/vim-startify'  
  Plug 'preservim/nerdtree'
+ Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
 set clipboard+=unnamedplus "Set system clipboard, needs xclip installed
 set number relativenumber "Line numbers relative to location for easier navigation
 syntax on "Syntax highlighting on
-colorscheme spacecamp "Set colorscheme
+colorscheme dracula "Set colorscheme
 
 let g:vimtex_view_general_viewer = 'setsid -f zathura'
 let g:startify_bookmarks = [ {'n': '~/.config/nvim/init.vim'} ] "Vim-startify bookmarks
