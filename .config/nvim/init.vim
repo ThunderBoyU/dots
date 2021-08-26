@@ -25,6 +25,11 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
 call plug#end()
 
+if exists('g:started_by_firenvim') && g:started_by_firenvim
+    " general options
+    set laststatus=0 nonumber noruler noshowcmd
+endif
+
 set clipboard+=unnamedplus "Set system clipboard, needs xclip installed
 set number relativenumber "Line numbers relative to location for easier navigation
 syntax on "Syntax highlighting on
