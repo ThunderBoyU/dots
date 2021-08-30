@@ -19,7 +19,7 @@ call plug#begin(system('echo -n "${XDG_CONFIG_HOME:-$HOME/.config}/nvim/plugged"
  Plug 'lervag/vimtex'
  Plug 'sheerun/vim-polyglot'
  Plug 'jiangmiao/auto-pairs'
- Plug 'dracula/vim'
+ Plug 'crusoexia/vim-dracula'
  Plug 'mhinz/vim-startify'  
  Plug 'preservim/nerdtree'
  Plug 'glacambre/firenvim', { 'do': { _ -> firenvim#install(0) } }
