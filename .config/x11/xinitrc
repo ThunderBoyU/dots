@@ -2,7 +2,16 @@
 
 # xinitrc runs automatically when you run startx.
 
-# Run xprofile file
-[ -f "${XDG_CONFIG_HOME:-$HOME/.config}/x11/xprofile" ] && . "${XDG_CONFIG__HOME:-$HOME/.config}/x11/xprofile"
+displays & # Set correct monitor layout and refresh rate
+xrdb -load "$XRESOURCES" # Load Xresources
+xsetroot -cursor_name left_ptr & # Change default cursor on desktop
+setbg & # Set wallpaper, if pywal is installed it will override xresources
+xcompmgr & # Compositor, needed for transparency
+mpd-notification & # Notifications for mpd
+unclutter & # Hide cursor if it is inactive
+dwmblocks & # Update dwm status bar
+dunst & # Start dunst notification daemon
+xset r rate 300 50 & # Set keyboard rate higher
+automail & # Script for automatic mail syncing, except when csgo is open.
 
-exec dwm
+exec dwm # Launch dwm last

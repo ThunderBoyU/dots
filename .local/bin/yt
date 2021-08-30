@@ -38,19 +38,23 @@ addchannel() {
 
 viewfeed() {
 	depcheck $player sfeed
-	yt "$(sfeed_plain "$feeddir"/* | sort -r | dmenu -i -l 40)"
+	play "$(sfeed_plain "$feeddir"/* | sort -r | dmenu -i -l 40)"
 
+}
+
+play() {
+	notify-send "Opening video" "Please wait..." ; echo "$(geturl "$1")" >> "$log" ; $player "$(geturl "$1")" ; exit
 }
 
 depcheck $player
 [ ! -f "$log" ] && touch "$log"
 
-[ ! -z "$1" ] && echo "$1" | { grep youtube.com && { notify-send "Opening video" "Please wait..." & echo "$(geturl "$1")" >> "$log" & $player "$(geturl "$1")" & exit; } || { notify-send "Not a valid youtube url." ; exit 2; } ; }
+#[ "$1" ! = "" ] && notify-send "Opening video" "Please wait..." & echo "$(geturl "$1")" >> "$log" & $player "$(geturl "$1")" & exit
 
 [ -z "$1" ] && selection="$(printf "Search video\nWatch video from url\nSubscriptions\nSubscribe to channel" | dmenu -i -p "Select Action")" 
 
 [ "$selection" = "Search video" ] && ytfzf -D
-[ "$selection" = "Watch video from url" ] && url="$(echo "" | dmenu -i -p "Paste video url: " )" && yt "$url"
+[ "$selection" = "Watch video from url" ] && url="$(echo "" | dmenu -i -p "Paste video url: " )" && play "$url"
 [ "$selection" = "Subscriptions" ] &&  sfeed_update "$sfeedrc" >/dev/null && viewfeed
 [ "$selection" = "Subscribe to channel" ] && addchannel
 
