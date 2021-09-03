@@ -23,6 +23,7 @@ endif
 
 set clipboard+=unnamedplus "Set system clipboard, needs xclip installed
 set number relativenumber "Line numbers relative to location for easier navigation
+set scrolloff=10
 syntax on "Syntax highlighting on
 colorscheme dracula "Set colorscheme
 

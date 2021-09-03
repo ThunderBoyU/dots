@@ -14,4 +14,6 @@ dunst & # Start dunst notification daemon
 xset r rate 300 50 & # Set keyboard rate higher
 automail & # Script for automatic mail syncing, except when csgo is open.
 
+gajim & # XMPP Messaging program
+
 exec dwm # Launch dwm last
