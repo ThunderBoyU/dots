@@ -26,6 +26,11 @@ export MPDLIBRARY="$MUSIC/mpd"
 export XNOTIFY_FIFO="$XDG_CACHE_HOME/xnotify.fifo"
 export XRESOURCES="$XDG_CONFIG_HOME/x11/xresources"
 
+# COMPOSE KEY
+GTK_IM_MODULE=ibus
+QT_IM_MODULE=ibus
+XMODIFIERS=@im=ibus
+
 # CLEANUP 
 export GNUPGHOME="${XDG_DATA_HOME:-$HOME/.local/share}/gnupg"
 export DVDCSS_CACHE="$XDG_DATA_HOME"/dvdcss
